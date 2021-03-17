@@ -40,6 +40,8 @@ module.getWrap(obj) `Returns the wrapped form of an object (if already wrapped).
 
 module.wait(obj) `If the given object isn't wrapped, it will yield until it is`  
 
+module.new(string) `Exactly the same as Instance.new(), but the return object is wrapped`  
+
 
 Combined with things such as Event.lua, you can do some cool things.
 
