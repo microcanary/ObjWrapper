@@ -6,10 +6,8 @@ local function checkProperty(obj, property)
     return pcall(function() local a = obj[property] end)
 end
 
-if not shared._wrapped then
-    shared._wrapped = {}
-    shared._wrapped.queued = {}
-end
+_wrapped = {}
+_wrapped.queued = {}
 
 -- Module
 
@@ -24,7 +22,7 @@ objWrap.wrap = function(obj)
     
     local attributes = {}
     
-    shared._wrapped[wrapID] = attributes
+    _wrapped[wrapID] = attributes
     
     obj:SetAttribute("_wrapID", wrapID)
     
@@ -43,10 +41,10 @@ objWrap.wrap = function(obj)
         end;
     })
     
-    for i = #shared._wrapped.queued, 1, -1 do
-        if shared._wrapped.queued[i][2] == obj then
-            coroutine.resume(shared._wrapped.queued[i][1])
-            table.remove(shared._wrapped.queued, i)
+    for i = #_wrapped.queued, 1, -1 do
+        if _wrapped.queued[i][2] == obj then
+            coroutine.resume(_wrapped.queued[i][1])
+            table.remove(_wrapped.queued, i)
         end
     end
     
@@ -60,7 +58,7 @@ objWrap.getWrap = function(obj)
     
     assert(ID, "Given object is not wrapped. Please use a wrapped object.")
     
-    local attributes = shared._wrapped[ID] 
+    local attributes = _wrapped[ID] 
     
     local wrappedObj = setmetatable({}, {
         __index = function(t, k)
@@ -98,7 +96,7 @@ objWrap.wait = function(obj)
     end
     
     local thread = coroutine.running()
-    table.insert(shared._wrapped.queued, {thread, obj})
+    table.insert(_wrapped.queued, {thread, obj})
     coroutine.yield()
 end
 
