@@ -4,9 +4,9 @@ An object wrapper for Roblox.
 
 Wrappers allow you to add on your own properties to objects in Roblox. 
 
-Before you click off thinking "there are a multitude of object wrappers already" or "attributes already exist", this wrapper accepts all data types, and this module wraps objects globally.  
+This wrapper accepts all data types, and this module wraps objects globally.  
 
-Meaning that wrapped objects are not local to the script it's wrapped on. Wrapping an object in another script will wrap the object globally. How does that work? Simple:
+Meaning that wrapped objects are not local to the script it's wrapped on. Wrapping an object in another script will wrap the object globally.
 
 ```lua
 -- script that wraps an object
